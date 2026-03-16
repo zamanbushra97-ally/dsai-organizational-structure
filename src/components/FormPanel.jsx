@@ -42,6 +42,7 @@ export function FormPanel({
 
       <div className="form-panel-section">
         <div className="form-panel-section__title">Hierarchy path (10 levels)</div>
+        <p className="form-panel-section__note">Click a card in the chart, then edit the labels below to rename each level from root to the selected node. Click Save to apply.</p>
         <div className="level-fields">
           {LEVEL_LABELS.map((label, i) => (
             <div key={i} className="level-row">
@@ -60,6 +61,7 @@ export function FormPanel({
 
       <div className="form-panel-section">
         <div className="form-panel-section__title">Selected node</div>
+        <p className="form-panel-section__note">Rename this node in the field below and click Save. Use Edit to focus the field, Deselect to clear selection, or Delete to remove the node and its children.</p>
         <div className="level-row" style={{ marginTop: '0.25rem' }}>
           <span className="level-dot l1" />
           <label>Current</label>
@@ -83,6 +85,7 @@ export function FormPanel({
 
       <div className="form-panel-section">
         <div className="form-panel-section__title">Add child to selected node</div>
+        <p className="form-panel-section__note">Enter a role or title below and click Add to create a new direct report under the selected node.</p>
         <div className="add-child-row">
           <input
             type="text"

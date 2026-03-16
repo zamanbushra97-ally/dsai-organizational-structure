@@ -226,10 +226,6 @@ function App() {
         onSearchChange={setSearchQuery}
         onExportFullPdf={handleExportFullPdf}
         isPdfGenerating={isPdfGenerating}
-        onUndo={handleUndo}
-        onRedo={handleRedo}
-        canUndo={canUndo}
-        canRedo={canRedo}
       />
       <div
         className="app"
