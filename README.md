@@ -2,6 +2,8 @@
 
 React app for viewing and editing the DSAI organizational chart. Standalone frontend (Vite + React); ready to connect to a backend later.
 
+**In the DSAI_ORG workspace:** `dsai-org-chart-app/` is kept **in sync with** `dsai-org-existing/` (same source, dependencies, and browser `localStorage` key). Edit either folder and copy changes to the other to keep them aligned.
+
 ## Run locally
 
 ```bash
@@ -21,11 +23,10 @@ Output is in `dist/`.
 
 ## Deploy to Vercel
 
-1. **Create a new repo on GitHub** (e.g. `dsai-org-chart-app` or `dsai-organizational-structure`).
+1. **Create a new repo on GitHub** (or use this folder as the repo root).
 
 2. **Push this folder as the repo root:**
    ```bash
-   cd dsai-org-chart-app
    git init
    git add .
    git commit -m "Initial commit: DSAI Organizational Structure app"
@@ -34,7 +35,7 @@ Output is in `dist/`.
    git push -u origin main
    ```
 
-3. **In Vercel:** Import the new GitHub repo. Leave **Root Directory** blank (this project is the root). Vercel will detect Vite and use `npm run build` and `dist/`.
+3. **In Vercel:** Import the GitHub repo. Leave **Root Directory** blank (this project is the root). Vercel will detect Vite and use `npm run build` and `dist/`.
 
 4. Deploy. The app will be available at your Vercel URL.
 

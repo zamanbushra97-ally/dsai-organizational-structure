@@ -15,18 +15,23 @@ export const SUB_LINEAGE = {
   cto: {
     rootBg: '#dbeafe',
     colors: [
-      '#bbf7d0',
-      '#93c5fd',
-      '#c4b5fd'
+      '#bbf7d0', /* VP Engineering */
+      '#93c5fd', /* VP Infrastructure, DevOps & Reliability */
+      '#c4b5fd', /* VP Analytics / Data Engineering */
+      '#fde047', /* VP IT */
+      '#fbcfe8', /* Head of Application Support */
+      '#fed7aa' /* Director, Information Security */
     ]
   },
   cpo: {
     rootBg: '#e0e7ff',
     colors: [
-      '#bbf7d0',
-      '#fde047',
-      '#fbcfe8',
-      '#fed7aa'
+      '#bbf7d0', /* Director, Product Management */
+      '#fde047', /* Director, UX & Design */
+      '#fbcfe8', /* Head of User Research & Insights */
+      '#fed7aa', /* Head of Product Content Strategy */
+      '#93c5fd', /* Head of Product Operations */
+      '#c4b5fd' /* Head of Product Marketing (PMM) */
     ]
   },
   cro: {

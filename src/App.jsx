@@ -17,16 +17,46 @@ const MIN_FORM_WIDTH = 280;
 const MAX_FORM_WIDTH = 560;
 
 const deepClone = (data) => JSON.parse(JSON.stringify(data));
+/** Bump when default `orgChartData.js` changes so cached charts refresh (v9: CAIO Associate Director IP branch headcount (1)). */
+const STORAGE_KEY = 'dsai-org-existing:v9';
+
+function loadPersistedState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (!parsed || !Array.isArray(parsed.history) || typeof parsed.historyIndex !== 'number') return null;
+    if (!parsed.history.length) return null;
+    const idx = Math.max(0, Math.min(parsed.historyIndex, parsed.history.length - 1));
+    return { history: parsed.history, historyIndex: idx };
+  } catch {
+    return null;
+  }
+}
 
 function App() {
-  const [history, setHistory] = useState(() => [deepClone(buildOrgChartData())]);
-  const [historyIndex, setHistoryIndex] = useState(0);
+  const [history, setHistory] = useState(() => {
+    const persisted = loadPersistedState();
+    return persisted ? persisted.history : [deepClone(buildOrgChartData())];
+  });
+  const [historyIndex, setHistoryIndex] = useState(() => {
+    const persisted = loadPersistedState();
+    return persisted ? persisted.historyIndex : 0;
+  });
   const orgChartData = history[historyIndex];
 
   const applyChange = useCallback((newData) => {
     setHistory(prev => [...prev.slice(0, historyIndex + 1), deepClone(newData)]);
     setHistoryIndex(prev => prev + 1);
   }, [historyIndex]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ history, historyIndex }));
+    } catch {
+      // ignore storage quota / blocked storage
+    }
+  }, [history, historyIndex]);
 
   const canUndo = historyIndex > 0;
   const canRedo = historyIndex < history.length - 1;
@@ -138,6 +168,14 @@ function App() {
     if (!canRedo) return;
     setHistoryIndex(prev => prev + 1);
   }, [canRedo]);
+
+  const handleResetToDefault = useCallback(() => {
+    if (!window.confirm('Load the built-in org chart from the app (latest CTO tree)? This clears your saved chart and undo history for this browser.')) return;
+    setHistory([deepClone(buildOrgChartData())]);
+    setHistoryIndex(0);
+    setSelectedNodeId(null);
+    setNewChildName('');
+  }, []);
 
   const handleExportFullPdf = useCallback(async () => {
     const container = chartContainerRef.current;
@@ -265,6 +303,7 @@ function App() {
           onRedo={handleRedo}
           canUndo={canUndo}
           canRedo={canRedo}
+          onResetToDefault={handleResetToDefault}
         />
       </div>
     </>

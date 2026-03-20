@@ -20,75 +20,210 @@ export function buildOrgChartData() {
         {
           label: 'CEO – Chief Executive Officer',
           children: [
+            /* CTO: VP Eng (+ Web/Mobile divisions, API, Game, QA), VP Infra/DevOps, VP Analytics/Data, VP IT, App Support, InfoSec */
             {
-              label: 'CTO – Chief Technology Officer',
+              label: 'CTO – Chief Technology Officer (1)',
               children: [
                 {
-                  label: 'VP of Engineering',
+                  label: 'VP Engineering (1)',
                   children: [
                     {
-                      label: 'Manager, Web Engineering',
+                      label: 'Director, Web Engineering (1)',
                       children: [
-                        { label: 'Engineering Manager - Frontend', children: ['Frontend Engineer'] },
-                        { label: 'Engineering Manager - Backend', children: ['Backend Engineer'] },
-                        { label: 'Engineering Manager - API', children: ['API Engineer'] }
+                        {
+                          label: 'Associate Director / Engineering Manager – Data Science & Engineering (2)',
+                          children: [
+                            {
+                              label: '🌐 WEB APPLICATION DIVISION',
+                              children: [
+                                {
+                                  label: 'Lead – Full Stack Developer (Web Platform) (1)',
+                                  children: ['Full Stack Developers (3)']
+                                },
+                                {
+                                  label: 'Senior Backend Developer (Node/Express) (1)',
+                                  children: ['Backend Developers (2)']
+                                },
+                                {
+                                  label: 'Senior Frontend Developer (1)',
+                                  children: ['Frontend Developers (2)']
+                                },
+                                'UI/UX Designers (2)',
+                                'QA Engineers (3)',
+                                'Data / AI / GeoAI Support (2)',
+                                'Site Reliability Engineer (SRE) (1)'
+                              ]
+                            },
+                            {
+                              label: '📱 MOBILE APPLICATION DIVISION',
+                              children: [
+                                {
+                                  label: 'Lead – Mobile Application Developer (1)',
+                                  children: ['Mobile App Developers (3)']
+                                },
+                                'Backend Support (Shared) (1)',
+                                'UI/UX Designers (1)',
+                                'QA Engineers (2)',
+                                'Data / Analytics Support (1)',
+                                'Site Reliability Engineer (SRE) (1)'
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          label: 'Lead – API & Integration (1)',
+                          children: [
+                            'Lead Software Developer (1)',
+                            'Full Stack Developers (1)',
+                            'Integration Engineers (TBD)'
+                          ]
+                        }
                       ]
                     },
                     {
-                      label: 'Manager, Mobile & Backend',
+                      label: 'Director – Game Development (1)',
                       children: [
-                        { label: 'QA Manager - Mobile', children: ['Mobile QA Engineer'] },
-                        { label: 'QA Manager - Backend', children: ['Backend QA Engineer'] },
-                        { label: 'Engineering Manager - Platform', children: ['Platform Engineer'] }
+                        {
+                          label: 'Associate Director / Engineering Manager – Game Development (1)',
+                          children: [
+                            {
+                              label: 'Game / Unity Development (Gamification Layer)',
+                              children: [
+                                'Lead – Game Development / Unity Lead (1 TBD)',
+                                'Game Design (TBD)',
+                                'Unity Developers (3)',
+                                'Game Artists (1)',
+                                'Learning & Analytics Integration (TBD)'
+                              ]
+                            }
+                          ]
+                        }
                       ]
                     },
                     {
-                      label: 'Manager, QA',
-                      children: [
-                        'QA Manager - Functional & API Testing',
-                        'QA Automation Engineer',
-                        'QA Performance Engineer'
-                      ]
-                    },
-                    { label: 'Manager, UX', children: ['UX Designer'] },
-                    {
-                      label: 'Manager, Infra & DevOps',
-                      children: ['DevOps Engineer', 'SRE/Infrastructure Engineer', 'Data Engineer']
-                    },
-                    {
-                      label: 'Manager, Performance & Load Testing',
-                      children: ['Performance Engineer']
-                    },
-                    { label: 'Manager, Security', children: ['Security Engineer'] },
-                    { label: 'Head of Application Support', children: ['Application Support Engineer'] }
+                      label: 'Director – QA & Release Engineering (1 TBD)',
+                      children: ['QA Managers / Leads (TBD)']
+                    }
                   ]
                 },
                 {
-                  label: 'VP Analytics Data Engineering',
+                  label: 'VP Infrastructure, DevOps & Reliability (1)',
                   children: [
-                    { label: 'Data Engineering Manager', children: ['Data Engineer'] }
+                    {
+                      label: 'Director, Infrastructure & DevOps (1)',
+                      children: [
+                        'Engineering Manager – Infrastructure & DevOps (1 TBD)',
+                        {
+                          label: 'Lead – Cloud & DevOps Engineer (1)',
+                          children: ['DevOps Engineers (2)']
+                        },
+                        'Site Reliability Engineer (SRE) (TBD)'
+                      ]
+                    }
                   ]
                 },
                 {
-                  label: 'VP IT & Infra Systems & Security',
+                  label: 'VP Analytics / Data Engineering (1)',
                   children: [
-                    { label: 'IT Manager', children: ['IT Support Engineer'] }
+                    {
+                      label: 'Director, Analytics & Data Engineering (1 TBD)',
+                      children: [
+                        {
+                          label: 'Associate Director / Engineering Manager – Data Strategy & Content (1)',
+                          children: [
+                            {
+                              label: 'Lead – Database Administration (1)',
+                              children: [
+                                'MongoDB DBAs (TBD)',
+                                'SQL DBAs (TBD)',
+                                'Database Reliability Engineers (TBD)'
+                              ]
+                            },
+                            'Full Stack Developer Trainees (3)',
+                            'UI/UX Designers (1)',
+                            'QA Engineers (1)',
+                            'Mobile App Developers (1)'
+                          ]
+                        },
+                        {
+                          label: 'Director, Analytics & BI (1 TBD)',
+                          children: ['BI / Analytics Engineers (TBD)']
+                        }
+                      ]
+                    }
                   ]
+                },
+                {
+                  label: 'VP IT (Internal Systems & Tools) (1)',
+                  children: [
+                    {
+                      label: 'Director, IT Operations & Enterprise Tools (1 TBD)',
+                      children: [
+                        {
+                          label: 'IT Managers (3)',
+                          children: ['IT Support Engineers (4)']
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  label: 'Head of Application Support (1)',
+                  children: [
+                    {
+                      label: 'Director, Application Support (1 TBD)',
+                      children: ['Application Support Engineers (3)']
+                    }
+                  ]
+                },
+                {
+                  label: 'Director, Information Security (1 TBD)',
+                  children: ['InfoSec Manager (1 TBD)']
                 }
               ]
             },
             {
               label: 'CPO – Chief Product Officer',
               children: [
-                { label: 'Director, Product Management', children: ['Product Managers'] },
+                {
+                  label: 'Director, Product Management',
+                  children: [
+                    'Product Manager (Core/Platform)',
+                    'Growth Product Manager (Retention & Monetization)',
+                    'Technical Product Manager (API & Infrastructure)'
+                  ]
+                },
                 {
                   label: 'Director, UX & Design',
-                  children: ['UI/UX Designers', 'Gamification Designers', 'UX Writers']
+                  children: [
+                    'UI/UX Designer',
+                    'Gamification Designer (Crucial for student engagement)',
+                    'UX Writer'
+                  ]
                 },
-                { label: 'Head of User Research', children: ['User Researchers'] },
+                {
+                  label: 'Head of User Research & Insights',
+                  children: [
+                    'User Researcher (Qualitative/Interviews)',
+                    'Product Data Analyst (Quantitative/Usage Metrics)'
+                  ]
+                },
                 {
                   label: 'Head of Product Content Strategy',
-                  children: ['Assessment Content Leads', 'Curriculum Alignment Specialists', 'Content Strategists']
+                  children: [
+                    'Assessment Content Lead',
+                    'Curriculum Alignment Specialist',
+                    'Content Strategist',
+                    'Localization Specialist (If scaling to different regions/languages)'
+                  ]
+                },
+                {
+                  label: 'Head of Product Operations (The "Engine Room")',
+                  children: ['Product Ops Manager (Tooling, Process, & Roadmapping)']
+                },
+                {
+                  label: 'Head of Product Marketing (PMM)',
+                  children: ['Product Marketing Manager (Go-to-Market & Communication)']
                 }
               ]
             },
@@ -99,7 +234,7 @@ export function buildOrgChartData() {
                   label: 'VP Government Sales',
                   children: [
                     { label: 'Director, Government Sales', children: ['Government Account Executive'] },
-                    { label: 'Government Sales Managers', children: ['Government Sales Representative'] }
+                    { label: 'Government Sales Manager', children: ['Government Sales Representative'] }
                   ]
                 },
                 {
@@ -126,7 +261,7 @@ export function buildOrgChartData() {
                 {
                   label: 'VP Customer Success',
                   children: [
-                    { label: 'Director, Enterprise Customer Success', children: ['Enterprise Customer Success Managers (CSMs)'] },
+                    { label: 'Director, Enterprise Customer Success', children: ['Enterprise Customer Success Manager (CSM)'] },
                     {
                       label: 'Director, Implementation / Professional Services',
                       children: [
@@ -175,8 +310,8 @@ export function buildOrgChartData() {
                 {
                   label: 'Director, Corporate Communications',
                   children: [
-                    { label: 'Corporate Communications Manager', children: ['Communications Specialists'] },
-                    { label: 'Content & Editorial Manager', children: ['Content Strategists / Writers'] }
+                    { label: 'Corporate Communications Manager', children: ['Communications Specialist'] },
+                    { label: 'Content & Editorial Manager', children: ['Content Strategist / Writer'] }
                   ]
                 },
                 {
@@ -227,7 +362,7 @@ export function buildOrgChartData() {
                   children: [
                     {
                       label: 'Recruiting Manager',
-                      children: ['Talent Acquisition Specialist', 'Recruiting Coordinators']
+                      children: ['Talent Acquisition Specialist', 'Recruiting Coordinator']
                     },
                     'Campus & Employer Branding Lead'
                   ]
@@ -264,12 +399,53 @@ export function buildOrgChartData() {
               label: 'Chief AI & Innovation Officer (CAIO)',
               children: [
                 {
-                  label: 'Director, AI Research & Development',
+                  label: 'Director, AI Research, Innovation & Intellectual Property',
                   children: [
-                    { label: 'Principal Machine Learning Research Scientist', children: ['Senior Machine Learning Research Scientist'] },
-                    'Computer Vision Research Scientist',
-                    'Natural Language Processing (NLP) Research Scientist',
-                    'Responsible AI / AI Ethics Specialist'
+                    {
+                      label: 'Associate Director – AI Research & Advanced Modeling',
+                      children: [
+                        {
+                          label: 'Principal Machine Learning Research Scientist',
+                          children: ['Senior Machine Learning Research Scientist']
+                        },
+                        'Computer Vision Research Scientist',
+                        'Natural Language Processing (NLP) Research Scientist',
+                        'Responsible AI / AI Ethics Specialist'
+                      ]
+                    },
+                    {
+                      label: 'Associate Director – Applied Innovation & Prototyping',
+                      children: [
+                        { label: 'Innovation Program Manager', children: ['AI Prototyping Engineer'] },
+                        'Research Translation Lead'
+                      ]
+                    },
+                    {
+                      label: 'Associate Director – Research Partnerships & Collaboration',
+                      children: [
+                        { label: 'Academic Partnerships Manager', children: ['Research Collaboration Coordinator'] },
+                        'Strategic Alliances & Grants Lead'
+                      ]
+                    },
+                    {
+                      label:
+                        'Associate Director – Intellectual Property, Publications & Technical Content (1)',
+                      children: [
+                        {
+                          label: 'Intellectual Property & Patent Lead',
+                          children: ['Patent Specialist']
+                        },
+                        {
+                          label: 'AI Innovation & Applied Research Lead',
+                          children: ['Research Associate (2)']
+                        },
+                        'Scientific Writing & Publications Lead',
+                        {
+                          label: 'Content Creation & Knowledge Dissemination Lead',
+                          children: ['Content creator (1)', 'Technical Writer']
+                        }
+                      ]
+                    }
                   ]
                 },
                 {
@@ -288,14 +464,6 @@ export function buildOrgChartData() {
                     { label: 'Data Science Manager', children: ['Data Scientist'] },
                     'Data Annotation / Labeling Specialist',
                     'Data Quality Assurance (QA) & Validation Engineer'
-                  ]
-                },
-                {
-                  label: 'Director, Innovation, Research Partnerships & IP',
-                  children: [
-                    { label: 'Innovation Program Manager', children: ['AI Prototyping Engineer'] },
-                    { label: 'Academic Partnerships Manager', children: ['Research Collaboration Coordinator'] },
-                    'Intellectual Property & Patent Specialist'
                   ]
                 }
               ]

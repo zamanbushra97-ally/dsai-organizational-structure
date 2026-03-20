@@ -1,5 +1,30 @@
 import { LINEAGE_COLORS, SECTION_TO_BRANCH, SUB_LINEAGE } from '../constants/colors';
 
+function normalizeLabel(s) {
+  if (typeof s !== 'string') return '';
+  // Normalize dash variants and whitespace; lower-case for resilient matching.
+  return s
+    .replace(/[–—-]/g, '-') // en/em dash -> hyphen
+    .replace(/\s+/g, ' ')
+    .trim()
+    .toLowerCase();
+}
+
+function containsLabel(label, needle) {
+  if (typeof label !== 'string' || typeof needle !== 'string') return false;
+  const nLabel = normalizeLabel(label);
+  const nNeedle = normalizeLabel(needle);
+  return nNeedle.length > 0 && nLabel.includes(nNeedle);
+}
+
+const CEO_LABEL_PREFIX = 'CEO – Chief Executive Officer';
+const CTO_LABEL_PREFIX = 'CTO – Chief Technology Officer';
+const CPO_LABEL_PREFIX = 'CPO – Chief Product Officer';
+const CRO_LABEL_PREFIX = 'CBO/CRO – Chief Business Officer/Chief Revenue Officer';
+const CMO_LABEL_PREFIX = 'CMO – Chief Marketing Officer';
+const CFO_LABEL_PREFIX = 'CFO – Chief Financial Officer';
+const CAIO_LABEL_PREFIX = 'Chief AI & Innovation Officer (CAIO)';
+
 export function getNextId(orgChartData) {
   let max = 0;
   function walk(node) {
@@ -47,12 +72,24 @@ export function findNodeByLabel(node, label) {
 }
 
 export function getCEONode(orgChartData) {
-  return findNodeByLabel(orgChartData, 'CEO – Chief Executive Officer');
+  // Allow edits like: "CEO – Chief Executive Officer - John"
+  if (!orgChartData) return null;
+  let result = null;
+  (function walk(node) {
+    if (!node || result) return;
+    if (containsLabel(node.label, CEO_LABEL_PREFIX)) {
+      result = node;
+      return;
+    }
+    for (const child of node.children || []) walk(child);
+  })(orgChartData);
+  return result;
 }
 
 export function cloneForCSuiteOnly(node, parentLabel) {
   if (!node) return null;
-  const isChildOfCEO = parentLabel === 'CEO – Chief Executive Officer';
+  // Deprecated in favor of id-based pruning in getSectionRoots; keep for compatibility.
+  const isChildOfCEO = containsLabel(parentLabel, CEO_LABEL_PREFIX);
   const children = isChildOfCEO ? [] : (node.children || []).map(c => cloneForCSuiteOnly(c, node.label));
   return { id: node.id, label: node.label, children };
 }
@@ -60,6 +97,11 @@ export function cloneForCSuiteOnly(node, parentLabel) {
 export function findChildByLabel(node, label) {
   if (!node?.children) return null;
   return node.children.find(c => c.label === label) || null;
+}
+
+function findChildByLabelPrefix(node, labelPrefix) {
+  if (!node?.children) return null;
+  return node.children.find(c => containsLabel(c.label, labelPrefix)) || null;
 }
 
 export function getBranchIndexForNode(orgChartData, nodeId) {
@@ -82,14 +124,25 @@ export function getSectionRoots(orgChartData) {
   if (!ceo) {
     return { csuite: orgChartData, cto: null, cpo: null, cro: null, cmo: null, cfo: null, caio: null };
   }
+
+  // ID-based pruning so edits to the CEO label cannot break section boundaries.
+  const ceoId = ceo.id;
+  function cloneForCSuiteOnlyById(n, parentId) {
+    if (!n) return null;
+    const isDirectChildOfCEO = parentId === ceoId;
+    const children = isDirectChildOfCEO ? [] : (n.children || []).map(c => cloneForCSuiteOnlyById(c, n.id));
+    return { id: n.id, label: n.label, children };
+  }
+
   return {
-    csuite: cloneForCSuiteOnly(orgChartData, ''),
-    cto: findChildByLabel(ceo, 'CTO – Chief Technology Officer'),
-    cpo: findChildByLabel(ceo, 'CPO – Chief Product Officer'),
-    cro: findChildByLabel(ceo, 'CBO/CRO – Chief Business Officer/Chief Revenue Officer'),
-    cmo: findChildByLabel(ceo, 'CMO – Chief Marketing Officer'),
-    cfo: findChildByLabel(ceo, 'CFO – Chief Financial Officer'),
-    caio: findChildByLabel(ceo, 'Chief AI & Innovation Officer (CAIO)')
+    csuite: cloneForCSuiteOnlyById(orgChartData, null),
+    // Allow edits like: "CTO – Chief Technology Officer - Jane"
+    cto: findChildByLabelPrefix(ceo, CTO_LABEL_PREFIX),
+    cpo: findChildByLabelPrefix(ceo, CPO_LABEL_PREFIX),
+    cro: findChildByLabelPrefix(ceo, CRO_LABEL_PREFIX),
+    cmo: findChildByLabelPrefix(ceo, CMO_LABEL_PREFIX),
+    cfo: findChildByLabelPrefix(ceo, CFO_LABEL_PREFIX),
+    caio: findChildByLabelPrefix(ceo, CAIO_LABEL_PREFIX)
   };
 }
 
